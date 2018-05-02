@@ -10,7 +10,7 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
-def move(board, index, character = current_player)
+def move(board, index, character)
   board[index] = character
 end
 
@@ -27,7 +27,7 @@ def turn(board)
   user_input = gets.strip
   index = input_to_index(user_input)
   if valid_move?(board, index)
-    move(board, index)
+    move(board, index, character)
     display_board(board)
   else
     turn(board)
@@ -46,13 +46,10 @@ end
 
 def current_player(board)
   count = turn_count(board)
-  if count.zero?
-    return "X"
-    elsif count.odd?
-    return "O"
-    elsif count.even?
-    return "X"
+  if count.even?
+    "X"
   else
+    "O"
   end
 end
 
